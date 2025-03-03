@@ -23,41 +23,42 @@
 #define TVP1 4
 #define TVP2 5
 
-&mt {
-  quick-tap-ms = <100>;
-  global-quick-tap;
-  flavor = "tap-preferred";
-  tapping-term-ms = <170>;
-};
+
+// Yisusnote: this was the tap behavior that existed here before
+// &mt {
+//   quick-tap-ms = <100>;
+//   global-quick-tap;
+//   flavor = "tap-preferred";
+//   tapping-term-ms = <170>;
+// };
 
 / {
-     combos {
-            compatible = "zmk,combos";
-            combo_esc {
-                timeout-ms = <50>;
-                key-positions = <0 1>;
-                bindings = <&kp ESC>;
-            };
-            combo_tvp {
-                timeout-ms = <100>;
-                key-positions = <11 12 13>;
-                bindings = <&tog TVP1>;
-            };
-    };
-
-    macros {
-        gif: gif {
-            label = "giphy";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp LSHFT>
-                , <&macro_tap &kp N2>
-                , <&macro_release &kp LSHFT>
-                , <&macro_tap &kp G &kp I &kp F>
-                ;
+     behaviors {
+        // including homerow mods with tap preferred from https://zmk.dev/docs/keymaps/behaviors/hold-tap#option-2-tap-preferred
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
         };
-    };
+     };
+
+    // Commenting out combos for now
+    //  combos {
+    //         compatible = "zmk,combos";
+    //         combo_esc {
+    //             timeout-ms = <50>;
+    //             key-positions = <0 1>;
+    //             bindings = <&kp ESC>;
+    //         };
+    //         combo_tvp {
+    //             timeout-ms = <100>;
+    //             key-positions = <11 12 13>;
+    //             bindings = <&tog TVP1>;
+    //         };
+    // };
 
         keymap {
                 compatible = "zmk,keymap";
@@ -79,10 +80,10 @@ label= "BASE"                              ;
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &kp Q       &kp W       &kp F       &kp P       &kp G           &kp J       &kp L       &kp U       &kp Y       &kp SEMI
-                &mt LGUI A  &mt LALT R  &mt LCTRL S &mt LSHFT T &kp D           &kp H       &mt RSHFT N &mt RCTRL E &mt RALT I  &mt RGUI O
-    &kp Q       &kp Z       &kp X       &kp C       &kp V       &kp B           &kp K       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &kp BSLH
-                                        &kp DEL   &lt NAV TAB   &kp SPACE       &kp RET   &lt SYM ESC   &kp BSPC
+                &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp SEMI
+                &hm LCTRL A &hm LALT S  &hm LGUI D  &hm LSHFT F &kp G           &kp H       &hm RSHFT J &hm RGUI K  &hm RALT L  &mt RCTRL P
+    &none       &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &none
+                                        &kp ESC   &lt 2 SPACE   &kp TAB         &kp ENTER   &lt 1 BSPC  &kp DEL
                         >;
                 };
 
@@ -91,7 +92,7 @@ label= "BASE"                              ;
 
                 nav_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "NAVI"                              ;
+label= "NUMBER"
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃     UP    ┃           ┃     {     ┃   ┃     }     ┃     7     ┃     8     ┃     9     ┃     +     ┃
@@ -105,10 +106,10 @@ label= "NAVI"                              ;
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &kp ESC     &bt BT_CLR  &kp UP      &kp EQUAL   &kp LBRC        &kp RBRC    &kp KP_N7   &kp KP_N8   &kp KP_N9   &kp KP_PLUS
-                &kp LSHFT   &kp LEFT    &kp DOWN    &kp RIGHT   &kp LBKT        &kp RBKT    &kp KP_N4   &kp KP_N5   &kp KP_N6   &kp KP_MINUS
-    &trans      &kp DEL     &kp PG_UP   &kp CAPS    &kp PG_DN   &kp LPAR        &kp RPAR    &kp KP_N1   &kp KP_N2   &kp KP_N3   &kp KP_MULTIPLY &trans      
-                                        &trans      &trans      &trans          &mo ADJ     &kp KP_N0   &trans      
+                &kp LBKT    &kp N7      &kp N8      &kp N9      &kp RBKT           &none            &none            &none            &none            &none
+                &kp SEMI    &kp N4      &kp N5      &kp N6      &kp EQUAL          &none            &trans           &trans           &trans           &trans
+    &none       &kp GRAVE   &kp N1      &kp N2      &kp N3      &kp BSLH           &none            &none            &none            &none            &none     &none
+                                        &kp LS(PERIOD) &kp N0   &kp MINUS          &kp ENTER        &trans           &kp RALT
                         >;
                 };
 
@@ -117,7 +118,7 @@ label= "NAVI"                              ;
 
                 sim_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "SYM"                               ;
+label= "FUNC"                               ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃     !     ┃     @     ┃     #     ┃     $     ┃     %     ┃   ┃     ˆ     ┃     &     ┃     Ü     ┃     '     ┃     "     ┃
@@ -129,12 +130,12 @@ label= "SYM"                               ;
 //                                     ┃           ┃    GIF    ┃    ADJ    ┃   ┃           ┃           ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
-// ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
+      // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT       &kp CARET   &kp AMPS    &kp RA(U)   &kp SQT     &kp DQT       
-                &kp RA(A)   &trans      &kp RA(S)   &trans      &trans          &kp C_MUTE  &kp LS(RA(N4)) &kp RA(N5) &kp RA(N4)   &kp RA(O) 
-    &trans      &kp RA(F18) &kp RA(F19) &trans      &trans      &trans          &kp C_VOL_DN &kp C_VOL_UP &kp C_PREV &kp C_NEXT  &kp BSLH   &trans         
-                                        &trans      &gif        &mo ADJ         &trans      &kp C_PP    &trans      
+                      &kp none    &kp none    &kp none    &kp none    &kp none        &bt BT_SEL 0      &bt BT_SEL 1      &bt BT_SEL 2      &bt BT_SEL 3     &bt BT_SEL 4
+                      &kp LCTRL   &kp LALT    &kp LGUI    &kp LSHFT   &none           &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT   &none     &none
+   &kp LG(LC(LS(N4))) &kp LG(Z)   &kp LG(X)   &kp LG(C)   &kp LG(V)   &none           &kp C_VOL_DN &kp C_VOL_UP &kp C_PREV &kp C_NEXT  &kp BSLH   &trans
+                                              &trans      &trans      &trans          &trans      &trans    &trans
                         >;
                 };
 
