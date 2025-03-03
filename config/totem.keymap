@@ -132,7 +132,7 @@ label= "FUNC"                               ;
  bindings = <
       // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                      &kp none    &kp none    &kp none    &kp none    &kp none        &bt BT_SEL 0      &bt BT_SEL 1      &bt BT_SEL 2      &bt BT_SEL 3     &bt BT_SEL 4
+                      &none    &none    &none    &none    &none                       &bt BT_SEL 0      &bt BT_SEL 1      &bt BT_SEL 2      &bt BT_SEL 3     &bt BT_SEL 4
                       &kp LCTRL   &kp LALT    &kp LGUI    &kp LSHFT   &none           &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT   &none     &none
    &kp LG(LC(LS(N4))) &kp LG(Z)   &kp LG(X)   &kp LG(C)   &kp LG(V)   &none           &kp C_VOL_DN &kp C_VOL_UP &kp C_PREV &kp C_NEXT  &kp BSLH   &trans
                                               &trans      &trans      &trans          &trans      &trans    &trans
