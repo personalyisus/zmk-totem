@@ -73,7 +73,7 @@ label= "BASE"                              ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp SQT
-                &hm LCTRL A &hm LALT S  &hm LGUI D  &hm LSHFT F &kp G           &kp H       &hm RSHFT J &hm RGUI K  &hm RALT L  &mt RCTRL P
+                &hm LCTRL A &hm LALT S  &hm LGUI D  &hm LSHFT F &kp G           &kp H       &hm RSHFT J &hm RGUI K  &hm RALT L  &hm RCTRL P
     &none       &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &none
                                         &kp ESC   &lt 2 SPACE   &kp TAB         &kp ENTER   &lt 1 BSPC  &kp DEL
                         >;
