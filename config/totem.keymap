@@ -20,13 +20,12 @@
 #define NAV  1
 #define SYM  2
 
-// Yisusnote: this was the tap behavior that existed here before
-// &mt {
-//   quick-tap-ms = <100>;
-//   global-quick-tap;
-//   flavor = "tap-preferred";
-//   tapping-term-ms = <170>;
-// };
+
+ // This is so I can potentially press my backspaced twice and
+ // make it send multiple keypresses afterwards?
+ &lt {
+  quick-tap-ms = <150>;
+ };
 
 / {
      behaviors {
@@ -39,22 +38,19 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
+        // Trying out this behavior since
+        // Whenever I'm writing the homerow mods get triggered
+        // and silly things happen
+        rpi: require_prior_idle {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <150>;
+            quick-tap-ms = <150>;
+            require-prior-idle-ms = <100>;
+            bindings = <&kp>, <&kp>;
+        };
      };
-
-    // Commenting out combos for now
-    //  combos {
-    //         compatible = "zmk,combos";
-    //         combo_esc {
-    //             timeout-ms = <50>;
-    //             key-positions = <0 1>;
-    //             bindings = <&kp ESC>;
-    //         };
-    //         combo_tvp {
-    //             timeout-ms = <100>;
-    //             key-positions = <11 12 13>;
-    //             bindings = <&tog TVP1>;
-    //         };
-    // };
 
         keymap {
                 compatible = "zmk,keymap";
@@ -77,7 +73,7 @@ label= "BASE"                              ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp SQT
-                &hm LCTRL A &hm LALT S  &hm LGUI D  &hm LSHFT F &kp G           &kp H       &hm RSHFT J &hm RGUI K  &hm RALT L  &mt RCTRL P
+                &rpi LCTRL A &rpi LALT S  &rpi LGUI D  &rpi LSHFT F &kp G           &kp H       &rpi RSHFT J &rpi RGUI K  &rpi RALT L  &mt RCTRL P
     &none       &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &none
                                         &kp ESC   &lt 2 SPACE   &kp TAB         &kp ENTER   &lt 1 BSPC  &kp DEL
                         >;
